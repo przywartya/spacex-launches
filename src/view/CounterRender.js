@@ -13,8 +13,6 @@ const style = {
     width: 50,
     height: 50,
     borderRadius: '50%',
-
-    backgroundColor: '#00CFFF',
 };
 
 // renders a Ball at a certain height
@@ -101,12 +99,12 @@ class CounterRender extends React.Component {
         <div className="four" onClick={this.switchTimer.bind(this)}>
             <div className="bounce">
                 <BouncingDoggo
-                    duration={1000}
-                    start={-80}
-                    end={0}
-                    isRunning={this.state.isRunning}
-                    >
-                    { value => <Ball y={value} /> }
+                  duration={1000}
+                  start={-250}
+                  end={0}
+                  isRunning={this.state.isRunning}
+                  >
+                  { value => <Ball y={value} /> }
                 </BouncingDoggo>
             </div>
             <Counter 

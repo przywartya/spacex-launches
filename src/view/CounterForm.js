@@ -34,27 +34,17 @@ class Home extends React.Component {
       <div className={this.state.classNames}>
         <div className="one">
             <label for="from">Start (in minutes): </label>
-                <NumericInput id="from" min={0} max={60} value={this.state.from} 
-                onChange={this.handleFrom.bind(this)}
-                style={{
-                    input: {
-                        'max-width': '60px',
-                    }
-                }}/>
+            <NumericInput id="from" min={0} max={60} value={this.state.from} 
+             onChange={this.handleFrom.bind(this)}/>
         </div>
         <div className="two">
             <label for="to">End (in minutes): </label>
             <NumericInput id="to" min={0} max={60} value={this.state.to} 
-            onChange={this.handleTo.bind(this)}
-            style={{
-                input: {
-                    'max-width': '60px',
-                }
-            }}/>
+             onChange={this.handleTo.bind(this)}/>
         </div>
         {this.state.from < this.state.to 
         ? <CounterRender from={this.state.from} to={this.state.to} 
-            onSuccess={this.setBackgroundOnFinish.bind(this)}/>
+           onSuccess={this.setBackgroundOnFinish.bind(this)}/>
         : 'Use this form to render a counter :)'
         }
       </div>
