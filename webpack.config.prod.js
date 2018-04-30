@@ -20,13 +20,13 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('docs'),
     filename: '[name].[hash].js',
     publicPath: '',
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['docs']),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
@@ -91,6 +91,20 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true
+            },
+          }
+        ]
       },
     ],
   },

@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js",
-    "serve": "serve dist",
+    "serve": "serve docs",
     "lint": "eslint src"
   },
   "dependencies": {

@@ -13,11 +13,6 @@ Using https://github.com/r-spacex/SpaceX-API.
 * Sass
 * PostCSS (autoprefixer)
 
-## Installation
-* `git clone https://github.com/mkaczkowski/daftcode-react-starter.git`
-* cd daftcode-react-starter
-* npm install
-
 ## Development
 * npm start
 * open `http://localhost:3000/`

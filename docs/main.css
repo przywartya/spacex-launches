@@ -1,0 +1,202 @@
+.launch-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.launch-details__navbar {
+  background: #22272b;
+  padding: 0 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .launch-details__navbar div {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+  .launch-details__navbar .navbar__go-back {
+    color: #ccac5b; }
+    .launch-details__navbar .navbar__go-back svg {
+      vertical-align: middle; }
+    .launch-details__navbar .navbar__go-back .arrow {
+      vertical-align: middle;
+      background: #ccac5b;
+      display: inline-block;
+      width: 33px;
+      height: 2px; }
+    .launch-details__navbar .navbar__go-back h5 {
+      display: inline-block;
+      margin-left: 22px; }
+  .launch-details__navbar .navbar__logo {
+    text-align: center; }
+
+.launch-details__body {
+  padding: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline; }
+  .launch-details__body .body-column-left {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+    .launch-details__body .body-column-left div {
+      margin-bottom: 22px; }
+    .launch-details__body .body-column-left h1, .launch-details__body .body-column-left h5, .launch-details__body .body-column-left p, .launch-details__body .body-column-left img {
+      margin: 0; }
+    .launch-details__body .body-column-left h5 {
+      color: #a7a9ac; }
+  .launch-details__body .body-column-right {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+    .launch-details__body .body-column-right p {
+      margin-top: 0;
+      color: #666666; }
+    .launch-details__body .body-column-right .description-title {
+      border-bottom: 2px #ccac5b solid;
+      color: #ccac5b;
+      margin-bottom: 22px; }
+    .launch-details__body .body-column-right .description-body {
+      margin-bottom: 66px; }
+      .launch-details__body .body-column-right .description-body .description-details {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex; }
+        .launch-details__body .body-column-right .description-body .description-details .details-left, .launch-details__body .body-column-right .description-body .description-details .details-right {
+          width: 50%;
+          border-left: 3px #a7a9ac dotted;
+          padding-left: 22px;
+          margin-bottom: 11px; }
+          .launch-details__body .body-column-right .description-body .description-details .details-left span, .launch-details__body .body-column-right .description-body .description-details .details-right span {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px; }
+          .launch-details__body .body-column-right .description-body .description-details .details-left div, .launch-details__body .body-column-right .description-body .description-details .details-right div {
+            margin-top: 5px; }
+          .launch-details__body .body-column-right .description-body .description-details .details-left .detail-key, .launch-details__body .body-column-right .description-body .description-details .details-right .detail-key {
+            color: #a7a9ac; }
+
+.rocket-menu {
+  background-size: cover;
+  background-position: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 491px; }
+  .rocket-menu .rocket-menu-title {
+    color: #ffffff;
+    text-align: center;
+    z-index: 1; }
+  .rocket-menu .rocket-menu-body {
+    text-align: center;
+    margin-bottom: 66px;
+    z-index: 1; }
+    .rocket-menu .rocket-menu-body a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      border: 1px solid #ffffff;
+      padding: 5px 22px;
+      margin-right: 18px;
+      color: #ffffff; }
+  .rocket-menu img {
+    z-index: 0;
+    visibility: hidden;
+    max-width: 100%; }
+
+.launch-details__footer {
+  width: 100%;
+  background-color: #22272b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+  .launch-details__footer .footer__title {
+    padding-left: 44px;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+    .launch-details__footer .footer__title h6 {
+      border-right: 1px #666666 solid;
+      display: inline-block;
+      margin-right: 11px;
+      color: #666666;
+      padding-right: 11px; }
+    .launch-details__footer .footer__title .footer__links {
+      display: inline-block;
+      margin-right: 5px; }
+      .launch-details__footer .footer__title .footer__links a {
+        color: #a7a9ac;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-right: 11px; }
+  .launch-details__footer .footer__signature {
+    padding-right: 44px;
+    text-align: right;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    color: #666666; }
+
+html {
+  font-family: 'Open Sans', sans-serif;
+  color: #0f1112; }
+
+body {
+  margin: 0; }
+
+h5 {
+  font-size: 14px;
+  letter-spacing: 11px;
+  word-spacing: 11px;
+  font-weight: 600; }
+
+h6 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600; }
+
+p {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px; }
+
+h1 {
+  font-size: 36px;
+  letter-spacing: 1.5px;
+  font-weight: 600; }
+
+h2 {
+  font-size: 24px;
+  letter-spacing: 18px;
+  word-spacing: 18px;
+  font-weight: 600; }
+
+
+/*# sourceMappingURL=main.css.map*/
