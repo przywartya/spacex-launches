@@ -2,7 +2,8 @@
 
 ## Description
 This application displays data about recent SpaceX rocket launches.
-Using https://github.com/r-spacex/SpaceX-API.
+Using: https://github.com/r-spacex/SpaceX-API.
+GH-PAGES: https://przywartya.github.io/spacex-launches/.
 
 ## Features
 * React 16.3
