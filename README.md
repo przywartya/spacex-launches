@@ -1,4 +1,8 @@
-# daftcode-react-starter
+# spacex-launches
+
+## Description
+This application displays data about recent SpaceX rocket launches.
+Using https://github.com/r-spacex/SpaceX-API.
 
 ## Features
 * React 16.3

@@ -1,0 +1,111 @@
+@import "../styles/variables"
+
+.launch-details
+    display: flex
+    flex-direction: column
+
+.launch-details__navbar
+    background: $dark-grey
+    padding: 0 44px
+    // height: 55px
+    display: flex
+    justify-content: center
+    align-items: center
+    div
+        flex: 1
+    .navbar__go-back
+        color: $desert
+        // align-self: center
+        svg
+            vertical-align: middle
+        .arrow
+            vertical-align: middle
+            background: $desert
+            display: inline-block
+            width: 33px
+            height: 2px
+        h5
+            display: inline-block
+            margin-left: 22px 
+    .navbar__logo
+        text-align: center
+        // align-self: center
+    
+
+.launch-details__body
+    padding: 44px
+    display: flex
+    align-items:  baseline
+
+    .body-column-left
+        flex: 1
+        div
+            margin-bottom: 22px
+        h1, h5, p, img
+            margin: 0
+        h5
+            color: $cool-grey
+
+    .body-column-right
+        flex: 1
+        p
+            margin-top: 0 
+            color: $brownish-grey
+        .description-title
+            border-bottom: 2px $desert solid
+            color: $desert
+            margin-bottom: 22px
+        
+        .description-body
+            margin-bottom: 66px
+
+            .description-details
+                display: flex
+                .details-left, .details-right
+                    width: 50%
+                    border-left: 3px $cool-grey dotted
+                    padding-left: 22px 
+                    margin-bottom: 11px
+                    span
+                        font-size: 14px
+                        font-weight: 600
+                        letter-spacing: 1px
+                    div
+                        margin-top: 5px 
+                    .detail-key
+                        color: $cool-grey
+
+.rocket-menu
+    background-size: cover
+    background-position: center
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
+    height: 491px
+
+    .rocket-menu-title
+        color: #ffffff
+        text-align: center
+        z-index: 1
+    .rocket-menu-body
+        text-align: center
+        margin-bottom: 66px
+        z-index: 1
+        a
+            text-decoration: none
+            font-size: 11px
+            font-weight: 600
+            letter-spacing: 1px
+            border-radius: 50px 
+            border: 1px solid #ffffff
+            padding: 5px 22px
+            margin-right: 18px
+            color: #ffffff
+    img
+        z-index: 0
+        visibility: hidden
+        max-width: 100%
+
+        
+    
+            
