@@ -30,7 +30,6 @@
     .navbar__logo
         text-align: center
         // align-self: center
-    
 
 .launch-details__body
     padding: 44px
@@ -93,7 +92,7 @@
         z-index: 1
         a
             text-decoration: none
-            font-size: 11px
+            font-size: 14px
             font-weight: 600
             letter-spacing: 1px
             border-radius: 50px 
@@ -106,6 +105,32 @@
         visibility: hidden
         max-width: 100%
 
-        
-    
-            
+.launch-details__footer
+    width: 100%
+    background-color: $dark-grey
+    display: flex
+    flex-direction: row
+    .footer__title
+        padding-left: 44px 
+        flex: 1
+        h6
+            border-right: 1px $brownish-grey solid
+            display: inline-block
+            margin-right: 11px
+            color: $brownish-grey
+            padding-right: 11px
+        .footer__links
+            display: inline-block
+            a
+                color: $cool-grey
+                font-size: 14px
+                letter-spacing: 1px
+                font-weight: 600
+                text-decoration: none
+                margin-right: 11px
+            margin-right: 5px
+    .footer__signature
+        padding-right: 44px
+        text-align: right
+        flex: 1
+        color: $brownish-grey
