@@ -166,6 +166,8 @@
   border-bottom: 2px #ccac5b solid;
   color: #ccac5b;
   margin-bottom: 22px; }
+  .description-title h5 {
+    margin-top: 0; }
 
 .description-body {
   margin-bottom: 66px; }
@@ -179,7 +181,8 @@
       -ms-flex-direction: row;
           flex-direction: row;
   -ms-flex-flow: row wrap;
-      flex-flow: row wrap; }
+      flex-flow: row wrap;
+  margin-bottom: 22px; }
   .description-details p {
     margin-top: 0;
     color: #666666; }
@@ -189,7 +192,8 @@
     border-left: 2px #a7a9ac dotted;
     padding-left: 22px;
     margin-bottom: 3px;
-    padding-top: 5px; }
+    padding-top: 5px;
+    margin-left: 11px; }
     .description-details .details-entry span {
       font-size: 14px;
       font-weight: 600;
