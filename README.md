@@ -19,6 +19,4 @@ GH-PAGES: https://przywartya.github.io/spacex-launches/.
 * open `http://localhost:3000/`
 
 ## Production
-* npm build
-* npm serve
-* open `http://localhost:5000/`
+* npm run-script build
