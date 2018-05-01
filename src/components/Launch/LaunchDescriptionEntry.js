@@ -17,16 +17,16 @@ class LaunchDescriptionEntry extends React.Component {
                     <h5>{this.props.descriptionTitle}</h5>
                 </div>
                 <div className="description-body">
-                    <div className="description-details">
-                        {this.props.descriptionDetailsList &&
-                            this.props.descriptionDetailsList.map(function (entry) {
-                                return <div className="details-entry">
+                    {this.props.descriptionDetailsList &&
+                        <div className="description-details">
+                            {this.props.descriptionDetailsList.map(function (entry, i) {
+                                return <div className="details-entry" key={i}>
                                     <span className="detail-key">{Object.keys(entry)[0]}: </span>
                                     <span className="detail-value">{entry[Object.keys(entry)[0]]}</span>
                                 </div>;
-                            })
-                        }
-                    </div>
+                            })}
+                        </div>
+                    }
                     <p>
                         {this.props.description}
                     </p>
