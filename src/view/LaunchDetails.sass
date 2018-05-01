@@ -4,49 +4,14 @@
     display: flex
     flex-direction: column
 
-.launch-details__navbar
-    background: $dark-grey
-    padding: 0 44px
-    // height: 55px
-    display: flex
-    justify-content: center
-    align-items: center
-    div
-        flex: 1
-    .navbar__go-back
-        color: $desert
-        // align-self: center
-        svg
-            vertical-align: middle
-        .arrow
-            vertical-align: middle
-            background: $desert
-            display: inline-block
-            width: 33px
-            height: 2px
-        h5
-            display: inline-block
-            margin-left: 22px 
-    .navbar__logo
-        text-align: center
-        // align-self: center
-
 .launch-details__body
     padding: 44px
     display: flex
-    align-items:  baseline
-
-    .body-column-left
+    align-items: baseline
+    .body-column-left, .body-column-right
         flex: 1
-        div
-            margin-bottom: 22px
-        h1, h5, p, img
-            margin: 0
-        h5
-            color: $cool-grey
-
+    
     .body-column-right
-        flex: 1
         p
             margin-top: 0 
             color: $brownish-grey
@@ -73,64 +38,3 @@
                         margin-top: 5px 
                     .detail-key
                         color: $cool-grey
-
-.rocket-menu
-    background-size: cover
-    background-position: center
-    display: flex
-    flex-direction: column
-    justify-content: flex-end
-    height: 491px
-
-    .rocket-menu-title
-        color: #ffffff
-        text-align: center
-        z-index: 1
-    .rocket-menu-body
-        text-align: center
-        margin-bottom: 66px
-        z-index: 1
-        a
-            text-decoration: none
-            font-size: 14px
-            font-weight: 600
-            letter-spacing: 1px
-            border-radius: 50px 
-            border: 1px solid #ffffff
-            padding: 5px 22px
-            margin-right: 18px
-            color: #ffffff
-    img
-        z-index: 0
-        visibility: hidden
-        max-width: 100%
-
-.launch-details__footer
-    width: 100%
-    background-color: $dark-grey
-    display: flex
-    flex-direction: row
-    .footer__title
-        padding-left: 44px 
-        flex: 1
-        h6
-            border-right: 1px $brownish-grey solid
-            display: inline-block
-            margin-right: 11px
-            color: $brownish-grey
-            padding-right: 11px
-        .footer__links
-            display: inline-block
-            a
-                color: $cool-grey
-                font-size: 14px
-                letter-spacing: 1px
-                font-weight: 600
-                text-decoration: none
-                margin-right: 11px
-            margin-right: 5px
-    .footer__signature
-        padding-right: 44px
-        text-align: right
-        flex: 1
-        color: $brownish-grey

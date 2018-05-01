@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader';
 import * as React from 'react';
-import { launch, launchPad, rocket } from './view/ExampleLaunch';
+import { launch, launchPad, rocket } from './assets/ExampleLaunch';
 import LaunchDetails from './view/LaunchDetails';
 
 import './styles/theme.sass';
