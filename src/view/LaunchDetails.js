@@ -32,7 +32,9 @@ class LaunchDetails extends React.Component {
     ]
     return (
       <div>
-        <Navbar/>
+        <div className="launch-details-navbar">
+          <Navbar/>
+        </div>
         <div className="launch-details-body">
           <div className="layout">
             <div className="layout__left">

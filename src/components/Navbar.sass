@@ -1,8 +1,6 @@
 @import "../styles/variables"
 
-.launch-details__navbar
-    background: $dark-grey
-    padding: 0 44px
+.navbar
     display: flex
     justify-content: center
     align-items: center
@@ -10,15 +8,10 @@
         flex: 1
     .navbar__logo
         text-align: center
-    .navbar__go-back
+    .navbar__backlink
         color: $desert
-        .arrow, svg
-            vertical-align: middle
-        .arrow
+        .arrow__line
             background: $desert
-            width: 33px
-            height: 2px
         h5
             margin-left: 22px
-    .navbar__go-back *
-        display: inline-block
+            display: inline-block
