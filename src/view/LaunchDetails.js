@@ -16,20 +16,20 @@ class LaunchDetails extends React.Component {
   }
 
   render() {
-    let descriptionEntryLaunchPad = [
-      {"NAME": this.props.launchPad["full_name"].toUpperCase()},
-      {"LOCATION": this.props.launchPad["location"]["name"].toUpperCase()}
-    ]
-    let descriptionEntryRocket = [
-      {"NAME": this.props.rocket["name"].toUpperCase()},
-      {"COMPANY": this.props.rocket["company"].toUpperCase()},
-      {"DIAMETER (m)": this.props.rocket["diameter"]["meters"]},
-      {"MASS (kg)": this.props.rocket["mass"]["kg"]},
-      {"FIRST FLIGHT": this.props.rocket["first_flight"].toUpperCase()},
-      {"COUNTRY": this.props.rocket["country"].toUpperCase()},
-      {"SUCCESS RATE (%)": this.props.rocket["success_rate_pct"]},
-      {"COST PER LAUNCH ($)": this.props.rocket["cost_per_launch"]},
-    ]
+    let descriptionLaunchPad = {
+      "NAME": this.props.launchPad["full_name"].toUpperCase(),
+      "LOCATION": this.props.launchPad["location"]["name"].toUpperCase(),
+    };
+    let descriptionEntryRocket = {
+      "NAME": this.props.rocket["name"].toUpperCase(),
+      "COMPANY": this.props.rocket["company"].toUpperCase(),
+      "DIAMETER (m)": this.props.rocket["diameter"]["meters"],
+      "MASS (kg)": this.props.rocket["mass"]["kg"],
+      "FIRST FLIGHT": this.props.rocket["first_flight"].toUpperCase(),
+      "COUNTRY": this.props.rocket["country"].toUpperCase(),
+      "SUCCESS RATE (%)": this.props.rocket["success_rate_pct"],
+      "COST PER LAUNCH ($)": this.props.rocket["cost_per_launch"]
+    };
     return (
       <div>
         <div className="launch-details-navbar">
@@ -53,7 +53,7 @@ class LaunchDetails extends React.Component {
               <LaunchDescriptionEntry
               descriptionTitle="LAUNCH PAD"
               description={this.props.launchPad.details}
-              descriptionDetailsList={descriptionEntryLaunchPad}
+              descriptionDetailsList={descriptionLaunchPad}
               />
             </div>
           </div>
