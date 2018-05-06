@@ -31,13 +31,14 @@ class LaunchDetails extends React.Component {
       {"COST PER LAUNCH ($)": this.props.rocket["cost_per_launch"]},
     ]
     return (
-      <div className="launch-details">
+      <div>
         <Navbar/>
-        <div className="launch-details__body">
-          <div className="body-column-left">
-            <LaunchLabel launch={this.props.launch}/>
-          </div>
-          <div className="body-column-right">
+        <div className="launch-details-body">
+          <div className="layout">
+            <div className="layout__left">
+              <LaunchLabel launch={this.props.launch}/>
+            </div>
+            <div className="layout__right">
               <LaunchDescriptionEntry
               descriptionTitle="DETAILS"
               description={this.props.launch.details}
@@ -52,6 +53,7 @@ class LaunchDetails extends React.Component {
               description={this.props.launchPad.details}
               descriptionDetailsList={descriptionEntryLaunchPad}
               />
+            </div>
           </div>
         </div>
         <RocketMenu launch={this.props.launch}/>

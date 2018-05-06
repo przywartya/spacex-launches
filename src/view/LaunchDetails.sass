@@ -1,40 +1,10 @@
 @import "../styles/variables"
 
-.launch-details
-    display: flex
-    flex-direction: column
-
-.launch-details__body
+.launch-details-body
     padding: 44px
+
+.layout
     display: flex
     align-items: baseline
-    .body-column-left, .body-column-right
+    .layout__left, .layout__right
         flex: 1
-    
-    .body-column-right
-        p
-            margin-top: 0 
-            color: $brownish-grey
-        .description-title
-            border-bottom: 2px $desert solid
-            color: $desert
-            margin-bottom: 22px
-        
-        .description-body
-            margin-bottom: 66px
-
-            .description-details
-                display: flex
-                .details-left, .details-right
-                    width: 50%
-                    border-left: 3px $cool-grey dotted
-                    padding-left: 22px 
-                    margin-bottom: 11px
-                    span
-                        font-size: 14px
-                        font-weight: 600
-                        letter-spacing: 1px
-                    div
-                        margin-top: 5px 
-                    .detail-key
-                        color: $cool-grey
