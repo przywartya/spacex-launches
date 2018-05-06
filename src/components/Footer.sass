@@ -1,31 +1,20 @@
 @import "../styles/variables"
 
-.launch-details__footer
-    width: 100%
-    background-color: $dark-grey
+.footer
     display: flex
-    flex-direction: row
-    .footer__title
-        padding-left: 44px 
+    .footer__title, .footer__signature
         flex: 1
+    .footer__title
         h6
-            border-right: 1px $brownish-grey solid
             display: inline-block
-            margin-right: 11px
             color: $brownish-grey
+            border-right: 1px $brownish-grey solid
+            margin-right: 11px
             padding-right: 11px
         .footer__links
             display: inline-block
-            a
+            .menu-link
                 color: $cool-grey
-                font-size: 14px
-                letter-spacing: 1px
-                font-weight: 600
-                text-decoration: none
-                margin-right: 11px
-            margin-right: 5px
     .footer__signature
-        padding-right: 44px
         text-align: right
-        flex: 1
         color: $brownish-grey

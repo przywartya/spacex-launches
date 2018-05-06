@@ -59,7 +59,9 @@ class LaunchDetails extends React.Component {
           </div>
         </div>
         <RocketMenu launch={this.props.launch}/>
-        <Footer/>
+        <div className="launch-details-footer">
+          <Footer/>
+        </div>
       </div>
     );
   }
