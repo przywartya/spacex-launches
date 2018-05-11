@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import './LaunchesList.sass';
 
 import Footer from '../components/Footer';
+import Logo from '../assets/space_x_logo_bw_centered.svg';
+import Moon from '../assets/moon.png';
 
 class LaunchesList extends React.Component {
   static propTypes = {
@@ -15,7 +17,13 @@ class LaunchesList extends React.Component {
     return (
       <div className="launches-list">
         <div className="launches-list__body">
-          <h1 onClick={this.props.onLaunchClick}>List of launches placeholder</h1>
+          <img src={Moon} className="body__moon"/>
+          <Logo className="body__logo"/>
+          {/* <div>
+            <h1 onClick={this.props.onLaunchClick}>
+                LAUNCHES 2018
+            </h1>
+          </div> */}
         </div>
         <div className="launches-list__footer">
           <Footer/>
