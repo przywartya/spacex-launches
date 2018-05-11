@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import isPast from 'date-fns/is_past'
+import isPast from 'date-fns/is_past';
 import parse from 'date-fns/parse';
 import { format } from 'date-fns';
 

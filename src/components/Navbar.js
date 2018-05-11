@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Arrow from './Arrow';
 
-import ArrowPointer from '../assets/arrow_pointer.svg';
 import Logo from '../assets/space_x_logo_bw_centered.svg';
 
 import './Navbar.sass';
