@@ -14,7 +14,7 @@ import Moon from '../assets/moon.png';
 
 class LaunchesList extends React.Component {
   state = {
-    rocketNameFilter: this.availableRocketNames[0],
+    rocketNameFilter: "ALL ROCKETS",
   };
 
   get availableRocketNames() {
@@ -29,7 +29,7 @@ class LaunchesList extends React.Component {
     const {rocketNameFilter} = this.state;
     const {launches} = this.props;
 
-    if(!rocketNameFilter) return launches;
+    if(rocketNameFilter === "ALL ROCKETS") return launches;
 
     return launches.filter( launch => launch.rocket.rocket_name.toUpperCase() === rocketNameFilter);
   }
@@ -52,6 +52,14 @@ class LaunchesList extends React.Component {
             return <div onClick={this.props.onLaunchClick} className="launches-timeline__item">
               <h5>{format(parse(launch.launch_date_utc), "DD MMMM YYYY").toUpperCase()}</h5>
               <Arrow direction={index % 2 === 0 ? 'right': 'left' }/>
+              <div className="launches-timeline__item__description">
+                <h6 className="launches-timeline__item__description__rocket">ROCKET:
+                  <span style={{color: "white"}}> {launch.rocket.rocket_name.toUpperCase()}</span>
+                </h6>
+                <h6 className="launches-timeline__item__description__launch-site">LAUNCH SITE:
+                  <span style={{color: "white"}}> {launch.launch_site.site_name_long.toUpperCase()}</span>
+                </h6>
+              </div>
             </div>;
             })}
           </div>
