@@ -16,7 +16,7 @@ class Navbar extends React.Component {
     return (
         <div className="navbar">
           <div className="navbar__backlink" onClick={this.props.onBackClick}>
-            <Arrow/>
+            <Arrow direction="left"/>
             <h5>GO BACK</h5>
           </div>
           <div className="navbar__logo">
