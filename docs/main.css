@@ -239,16 +239,33 @@ h6, .menu-link {
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    position: relative; }
+    position: relative;
+    margin-bottom: 66px; }
     .launches-list__body .launches-timeline__line {
       position: absolute;
       top: 0;
       bottom: 0;
       left: 50%;
-      border-left: thin dotted #a7a9ac; }
+      border-left: thin dashed #a7a9ac; }
     .launches-list__body .launches-timeline__item {
       width: 100%; }
+      .launches-list__body .launches-timeline__item__description__rocket, .launches-list__body .launches-timeline__item__description__launch-site {
+        display: inline-block;
+        color: #666666;
+        margin-top: 0;
+        margin-bottom: 0;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden; }
+      .launches-list__body .launches-timeline__item__description__rocket {
+        padding-right: 11px;
+        margin-right: 11px;
+        border-right: 1px #666666 solid; }
+      .launches-list__body .launches-timeline__item__description__launch-site {
+        max-width: 30%; }
       .launches-list__body .launches-timeline__item .arrow {
+        margin: 11px 0;
         width: 100%;
         position: relative; }
       .launches-list__body .launches-timeline__item .arrow__line {
@@ -264,7 +281,7 @@ h6, .menu-link {
         left: 50%;
         top: 50%;
         margin-left: -2px;
-        z-index: 999; }
+        z-index: 1; }
       .launches-list__body .launches-timeline__item h5 {
         margin: 0;
         word-spacing: 0;
@@ -280,13 +297,12 @@ h6, .menu-link {
   padding: 0 44px; }
 
 .filter-buttons {
-  margin-bottom: 22px; }
+  margin: 44px; }
   .filter-buttons .menu-link {
     color: #a7a9ac;
     border-radius: 50px;
     border: 1px solid #a7a9ac;
-    padding: 5px 22px;
-    font-weight: 500;
+    padding: 11px 44px;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
