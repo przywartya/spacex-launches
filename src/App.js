@@ -1,15 +1,17 @@
 import { hot } from 'react-hot-loader';
 import * as React from 'react';
-import { launch, launchPad, rocket } from './assets/ExampleLaunch';
-import LaunchDetails from './view/LaunchDetails';
+import { launch, launches, launchPad, rocket } from './assets/ExampleLaunch';
 
 import './styles/theme.sass';
+
+import LaunchDetails from './view/LaunchDetails';
+import LaunchesList from './view/LaunchesList';
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
-      viewName: 'details',
+      viewName: 'list',
     };
 
     this.handleLaunchClick = this.handleLaunchClick.bind(this);
@@ -22,7 +24,10 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     switch (viewName) {
       case 'list':
         return (
-          <div onClick={this.handleLaunchClick}>List of launches placeholder</div>
+          <LaunchesList
+            launches={launches}
+            onLaunchClick={this.handleLaunchClick}
+          />
         );
 
       case 'details':
