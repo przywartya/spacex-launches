@@ -13,14 +13,12 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     this.state = {
       viewName: 'list',
     };
-
     this.handleLaunchClick = this.handleLaunchClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   get activeViewComponent() {
     const { viewName } = this.state;
-
     switch (viewName) {
       case 'list':
         return (
@@ -29,7 +27,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             onLaunchClick={this.handleLaunchClick}
           />
         );
-
       case 'details':
         return (
           <LaunchDetails
@@ -39,7 +36,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             onBackClick={this.handleBackClick}
           />
         );
-
       default: return null;
     }
   }
@@ -49,7 +45,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 
   handleBackClick() {
-    debugger
     this.setState({ viewName: 'list' });
   }
 
