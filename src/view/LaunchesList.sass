@@ -24,6 +24,46 @@
     h2
         color: $cool-grey
         font-weight: 500
+    .launches-timeline
+        color: $white
+        width: 100%
+        display: flex
+        flex-wrap: wrap
+        position: relative
+        &__line
+            position: absolute
+            top: 0
+            bottom: 0
+            left: 50%
+            border-left: thin dotted $cool-grey
+        &__item
+            width: 100%
+            .arrow
+                width: 100%
+                position: relative
+            .arrow__line
+                width: 47%
+                background: $desert
+            .arrow__dot
+                display: inline
+                width: 5px
+                height: 5px
+                border-radius: 50%
+                background: $cool-grey
+                position: absolute
+                left: 50%
+                top: 50%
+                margin-left: -2px
+                z-index: 999
+            h5
+                margin: 0
+                word-spacing: 0
+                user-select: none
+        &__item:nth-child(even)
+            // background-color: green
+        &__item:nth-child(odd)
+            // background-color: blue
+            text-align: right
 
 .launches-list__footer
     background: $dark-grey

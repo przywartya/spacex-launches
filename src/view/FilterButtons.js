@@ -15,6 +15,7 @@ class FilterButtons extends React.Component {
 
   onItemClick = (event) => {
     const selectedItem = event.currentTarget.text;
+    this.props.onChange(selectedItem);
     this.setState({
       selectedItem,
     });
