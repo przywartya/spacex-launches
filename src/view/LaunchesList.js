@@ -19,11 +19,9 @@ class LaunchesList extends React.Component {
         <div className="launches-list__body">
           <img src={Moon} className="body__moon"/>
           <Logo className="body__logo"/>
-          {/* <div>
-            <h1 onClick={this.props.onLaunchClick}>
-                LAUNCHES 2018
-            </h1>
-          </div> */}
+          <h2 onClick={this.props.onLaunchClick}>
+            LAUNCHES 2018
+          </h2>
         </div>
         <div className="launches-list__footer">
           <Footer/>
