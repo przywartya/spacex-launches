@@ -13,6 +13,7 @@ class LaunchDetails extends React.Component {
     rocket: PropTypes.object.isRequired,
     launch: PropTypes.object.isRequired,
     launchPad: PropTypes.object.isRequired,
+    onBackClick: PropTypes.func.isRequired,
   }
 
   render() {
@@ -33,7 +34,7 @@ class LaunchDetails extends React.Component {
     return (
       <div>
         <div className="launch-details-navbar">
-          <Navbar/>
+          <Navbar onBackClick={this.props.onBackClick}/>
         </div>
         <div className="launch-details-body">
           <div className="layout">

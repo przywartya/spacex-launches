@@ -6,14 +6,52 @@ import LaunchDetails from './view/LaunchDetails';
 import './styles/theme.sass';
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewName: 'details',
+    };
+
+    this.handleLaunchClick = this.handleLaunchClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  get activeViewComponent() {
+    const { viewName } = this.state;
+
+    switch (viewName) {
+      case 'list':
+        return (
+          <div onClick={this.handleLaunchClick}>List of launches placeholder</div>
+        );
+
+      case 'details':
+        return (
+          <LaunchDetails
+            launch={launch}
+            launchPad={launchPad}
+            rocket={rocket}
+            onBackClick={this.handleBackClick}
+          />
+        );
+
+      default: return null;
+    }
+  }
+
+  handleLaunchClick() {
+    this.setState({ viewName: 'details' });
+  }
+
+  handleBackClick() {
+    debugger
+    this.setState({ viewName: 'list' });
+  }
+
   render() {
     return (
       <main>
-        <LaunchDetails
-          launch={launch}
-          launchPad={launchPad}
-          rocket={rocket}
-        />
+        {this.activeViewComponent}
       </main>
     );
   }
