@@ -8,9 +8,8 @@ class RocketMenu extends React.Component {
         launch: PropTypes.object.isRequired,
     }
     render() {
-        let backgroundImage = require('../../assets/rocket.png');
         return (
-            <div className="rocket-menu" style={{backgroundImage: `url(${backgroundImage})`}}>
+            <div className="rocket-menu" style={{backgroundImage: `url(${require('../../assets/rocket.png')})`}}>
                 <h2>MISSION LINKS</h2>
                 <div className="rocket-menu__body">
                     <a href={this.props.launch.links['reddit_launch']} className="menu-link">
