@@ -1,0 +1,42 @@
+@import "../../styles/variables"
+
+.timeline-item:nth-child(odd)
+    text-align: right
+
+.timeline-item
+    &__description
+        cursor: pointer
+        &__rocket, &__launch-site
+            display: inline-block
+            color: $brownish-grey
+            margin: 0
+            text-overflow: ellipsis
+            white-space: nowrap
+            overflow: hidden
+        &__rocket
+            padding-right: 11px
+            margin-right: 11px
+            border-right: 1px $brownish-grey solid
+        &__launch-site
+            max-width: 30%
+    h5
+        margin: 0
+        word-spacing: 0
+        user-select: none
+    .arrow
+        width: 100%
+        position: relative
+    .arrow__line
+        width: 47%
+        background: $desert
+    .arrow__dot
+        display: inline
+        width: 5px
+        height: 5px
+        border-radius: 50%
+        background: $cool-grey
+        position: absolute
+        left: 50%
+        top: 50%
+        margin-left: -2px
+
