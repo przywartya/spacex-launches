@@ -21,19 +21,18 @@ class FilterButtons extends React.Component {
     });
   };
 
+  renderButtonWithName(name) { 
+    const className = this.state.selectedItem === name ? 'menu-link menu-link_active': 'menu-link';
+    return (
+      <a onClick={this.onItemClick} className={className}>{name}</a>
+    );
+  };
+  
   render() {
     return (
       <div className="filter-buttons">
-        <a
-        onClick={this.onItemClick}
-        className={this.state.selectedItem === "ALL ROCKETS" ? 'menu-link menu-link_active': 'menu-link' }>
-        ALL ROCKETS</a>
-        {this.props.options.map((name) => {
-           return <a 
-                  onClick={this.onItemClick}
-                  className={this.state.selectedItem === name ? 'menu-link menu-link_active': 'menu-link' }
-                  >{name}</a>;
-        })}
+        {this.renderButtonWithName("ALL ROCKETS")}
+        {this.props.options.map((name) => this.renderButtonWithName(name))}
       </div>
     );
   }

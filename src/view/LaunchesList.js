@@ -6,11 +6,12 @@ import { format } from 'date-fns';
 
 import './LaunchesList.sass';
 
-import Footer from '../components/Footer';
-import Arrow from '../components/Arrow';
-import FilterButtons from './FilterButtons';
 import Logo from '../assets/space_x_logo_bw_centered.svg';
 import Moon from '../assets/moon.png';
+
+import Footer from '../components/Footer';
+import Arrow from '../components/Arrow';
+import FilterButtons from '../components/LaunchesList/FilterButtons';
 
 class LaunchesList extends React.Component {
   state = {
