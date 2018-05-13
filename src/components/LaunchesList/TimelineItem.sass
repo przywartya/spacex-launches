@@ -4,21 +4,18 @@
     text-align: right
 
 .timeline-item
+    display: flex
+    > div
+        flex: 1
     &__description
-        cursor: pointer
         &__rocket, &__launch-site
             display: inline-block
             color: $brownish-grey
-            margin: 0
-            text-overflow: ellipsis
-            white-space: nowrap
-            overflow: hidden
+            margin: 0  
         &__rocket
             padding-right: 11px
             margin-right: 11px
             border-right: 1px $brownish-grey solid
-        &__launch-site
-            max-width: 30%
     h5
         margin: 0
         word-spacing: 0
@@ -27,7 +24,7 @@
         width: 100%
         position: relative
     .arrow__line
-        width: 47%
+        width: 90%
         background: $desert
     .arrow__dot
         display: inline
@@ -36,7 +33,11 @@
         border-radius: 50%
         background: $cool-grey
         position: absolute
-        left: 50%
         top: 50%
+    .arrow__dot_left
         margin-left: -2px
+        left: 0
+    .arrow__dot_right
+        margin-right: -3px
+        right: 0
 

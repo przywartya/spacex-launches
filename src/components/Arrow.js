@@ -16,7 +16,7 @@ class Arrow extends React.Component {
       case 'left':
         return (
           <div className="arrow">
-            <div className="arrow__dot"></div>
+            <div className="arrow__dot arrow__dot_left"></div>
             <ArrowPointer/>
             <div className="arrow__line"></div>
           </div>
@@ -27,7 +27,7 @@ class Arrow extends React.Component {
           <div className="arrow">
             <div className="arrow__line"></div>
             <ArrowPointer className="right-arrow-pointer"/>
-            <div className="arrow__dot"></div>
+            <div className="arrow__dot arrow__dot_right"></div>
           </div>
         );
 
