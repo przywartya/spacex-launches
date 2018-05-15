@@ -13,7 +13,7 @@ class TimelineItem extends React.Component {
     onLaunchClick: PropTypes.func.isRequired,
   };
 
-  get timelineContent() {
+  get timelineItemContent() {
     const launch = this.props.launch;
     const direction = this.props.direction;
     const onClick = this.props.onLaunchClick;
@@ -24,14 +24,14 @@ class TimelineItem extends React.Component {
         </h5>
         <Arrow direction={direction}/>
         <div className="timeline-item__description">
-          <h6 className="timeline-item__description__rocket">ROCKET: 
-          <span style={{color: "white"}}>{
-            this.add3Dots(launch.rocket.rocket_name.toUpperCase(), "20")
-          }</span></h6>
-          <h6 className="timeline-item__description__launch-site">LAUNCH SITE: 
-          <span style={{color: "white"}}>{
-            this.add3Dots(launch.launch_site.site_name_long.toUpperCase(), "20")
-          }</span></h6>
+          <h6 className="timeline-item__description__text-with-border">
+            ROCKET:
+            <span className="timeline-item__description__text-grey"> {this.add3Dots(launch.rocket.rocket_name.toUpperCase(), "20")}</span>
+          </h6>
+          <h6>
+            LAUNCH SITE:
+            <span className="timeline-item__description__text-grey"> {this.add3Dots(launch.launch_site.site_name_long.toUpperCase(), "20")}</span>
+          </h6>
         </div>
       </div>
     );
@@ -50,8 +50,8 @@ class TimelineItem extends React.Component {
   render() {
     return (
       <div className="timeline-item">
-        {this.props.direction === 'right' ? this.timelineContent : <div></div>}
-        {this.props.direction === 'right' ? <div></div> : this.timelineContent}
+        {this.props.direction === 'right' ? this.timelineItemContent : <div></div>}
+        {this.props.direction === 'right' ? <div></div> : this.timelineItemContent}
       </div>
     );
   }

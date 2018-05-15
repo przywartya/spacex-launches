@@ -7,37 +7,41 @@
     display: flex
     > div
         flex: 1
-    &__description
-        &__rocket, &__launch-site
-            display: inline-block
-            color: $brownish-grey
-            margin: 0  
-        &__rocket
-            padding-right: 11px
-            margin-right: 11px
-            border-right: 1px $brownish-grey solid
     h5
         margin: 0
         word-spacing: 0
-        user-select: none
+    &__description
+        h6
+            display: inline-block
+            color: $brownish-grey
+            margin-top: 0
+            margin-bottom: 0
+        &__text-with-border
+            padding-right: 11px
+            margin-right: 11px
+            border-right: 1px $brownish-grey solid
+        &__text-grey
+            color: $cool-grey
     .arrow
-        width: 100%
         position: relative
+        width: 100%
+        margin: 11px 0 11px 0
     .arrow__line
-        width: 90%
         background: $desert
+        width: 90%
     .arrow__dot
+        background: $cool-grey
         display: inline
         width: 5px
         height: 5px
-        border-radius: 50%
-        background: $cool-grey
+        border-radius: 50px
         position: absolute
         top: 50%
-    .arrow__dot_left
-        margin-left: -2px
-        left: 0
-    .arrow__dot_right
-        margin-right: -3px
-        right: 0
+        &_left
+            margin-left: -2px
+            left: 0
+        &_right
+            margin-right: -3px
+            right: 0
+
 

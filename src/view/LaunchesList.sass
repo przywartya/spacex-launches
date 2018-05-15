@@ -1,31 +1,27 @@
 @import "../styles/variables"
 
-.launches-list
-  display: flex
-  min-height: 100vh
-  flex-direction: column
 
 .launches-list__body
     background: $almost-black
-    flex: 1
-    padding: 22px
+    padding: 100px 44px
     display: flex
     flex-direction: column
     align-items: center
-    .body__moon
-        margin-top: 66px
-        background-size: contain
-        background-repeat: no-repeat
-        width: 50vw
-    .body__logo
-        width: 35vw
-        margin-left: 5%
-        margin-top: -10%
     h2
         color: $cool-grey
         font-weight: 500
-    .launches-timeline
+    .launches-list__moon
+        background-size: contain
+        background-repeat: no-repeat
+        width: 60vw
+    .launches-list__logo
+        width: 35vw
+        margin-left: 5%
+        margin-top: -7%
+    .filter-buttons
+        margin-top: 22px
         margin-bottom: 66px
+    .timeline
         color: $white
         width: 100%     
 

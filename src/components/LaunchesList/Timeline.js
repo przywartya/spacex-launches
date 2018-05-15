@@ -12,8 +12,8 @@ class Timeline extends React.Component {
 
   render() {
     return (
-      <div className="launches-timeline">
-        <div className="launches-timeline__vertical-line"></div>
+      <div className="timeline">
+        <div className="timeline__vertical-line"></div>
         {this.props.filteredLaunches.map((launch, index) => {
         return <TimelineItem launch={launch} onLaunchClick={this.props.onLaunchClick}
           direction={index % 2 === 0 ? 'right': 'left' }/>;

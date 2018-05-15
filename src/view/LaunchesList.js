@@ -45,12 +45,9 @@ class LaunchesList extends React.Component {
     return (
       <div className="launches-list">
         <div className="launches-list__body">
-          <img src={Moon} className="body__moon"/>
-          <Logo
-          className="body__logo"/>
-          <h2>
-            LAUNCHES 2018
-          </h2>
+          <img src={Moon} className="launches-list__moon"/>
+          <Logo className="launches-list__logo"/>
+          <h2>LAUNCHES 2018</h2>
           <FilterButtons
           options={this.availableRocketNames}
           onChange={this.handleFilterChange.bind(this)}/>
