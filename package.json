@@ -16,7 +16,8 @@
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-hot-loader": "^4.0.1",
-    "react-numeric-input": "^2.2.3"
+    "react-numeric-input": "^2.2.3",
+    "react-spinners": "^0.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
