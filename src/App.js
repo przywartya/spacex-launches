@@ -11,30 +11,18 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
   constructor(props) {
     super(props);
     this.state = {
-      viewName: 'list',
-      launches: []
+      viewName: 'list'
     };
     this.handleLaunchClick = this.handleLaunchClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
-  async componentDidMount() {
-    const launches = await this.fetchLaunchesList();
-    this.setState({
-      launches: launches
-    });
-  }
-
   get activeViewComponent() {
-    const { launches, viewName } = this.state;
-    debugger
+    const { viewName } = this.state;
     switch (viewName) {
       case 'list':
         return (
-          <LaunchesList
-            launches={launches}
-            onLaunchClick={this.handleLaunchClick}
-          />
+          <LaunchesList onLaunchClick={this.handleLaunchClick}/>
         );
       case 'details':
         return (

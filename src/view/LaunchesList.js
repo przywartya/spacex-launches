@@ -17,28 +17,45 @@ class LaunchesList extends React.Component {
   };
 
   state = {
-    rocketNameFilter: "ALL ROCKETS",
+    rocketNameFilter: "FALCON 1",
+    filteredLaunches: [],
   };
+
+  async componentDidMount() {
+    this.setState({
+      filteredLaunches: await this.fetchLaunchByRocketName(this.state.rocketNameFilter)
+    });
+  }
 
   get availableRocketNames() {
-    return this.props.launches.reduce((names, launch) => {
-      let rocketName = launch.rocket.rocket_name.toUpperCase();
-      !names.includes(rocketName) && names.push(rocketName);
-      return names;
-    }, []);
+    return ["ALL ROCKETS", "FALCON 1", "FALCON 9", "FALCON 10", "FALCON HEAVY"];
   };
 
-  get filteredLaunches(){
-    const {rocketNameFilter} = this.state;
-    const {launches} = this.props;
+  async fetchLaunchByRocketName(rocketName) {
+    try {
+      const rocketId = rocketName.split(" ").join("").toLowerCase();
+      const URL = `https://api.spacexdata.com/v2/launches?rocket_id=${rocketId}`;
+      const fetchResult = fetch(URL);
+      const response = await fetchResult;
+      return await response.json();
+    } catch(e) {
+      throw Error(e);
+    }
+  }
 
-    if(rocketNameFilter === "ALL ROCKETS") return launches;
-
-    return launches.filter( launch => launch.rocket.rocket_name.toUpperCase() === rocketNameFilter);
+  async getFilteredLaunches(rocketNameFilter){
+    if(rocketNameFilter === "ALL ROCKETS") {
+      const filteredLaunches = await this.fetchLaunchByRocketName('');
+      this.setState({ filteredLaunches: filteredLaunches });
+    } else {
+      const filteredLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
+      this.setState({ filteredLaunches: filteredLaunches });
+    }
   };
 
   handleFilterChange(value) {
     this.setState({ rocketNameFilter: value });
+    this.getFilteredLaunches(value);
   };
 
   render() {
@@ -52,7 +69,7 @@ class LaunchesList extends React.Component {
           options={this.availableRocketNames}
           onChange={this.handleFilterChange.bind(this)}/>
           <Timeline 
-          filteredLaunches={this.filteredLaunches}
+          filteredLaunches={this.state.filteredLaunches}
           onLaunchClick={this.props.onLaunchClick}/>
         </div>
         <div className="launches-list__footer">
