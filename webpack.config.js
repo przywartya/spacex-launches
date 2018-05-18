@@ -1,3 +1,4 @@
+require("babel-polyfill");
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
@@ -8,7 +9,7 @@ module.exports = {
   mode: 'development',
   devtool: 'cheap-module-source-map',
 
-  entry: ['react-dev-utils/webpackHotDevClient', path.resolve('src/index.js')],
+  entry: ["babel-polyfill", 'react-dev-utils/webpackHotDevClient', path.resolve('src/index.js')],
 
   resolve: {
     modules: [

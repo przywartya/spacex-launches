@@ -1,3 +1,4 @@
+require("babel-polyfill");
 const autoprefixer = require('autoprefixer');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9,7 +10,7 @@ module.exports = {
   mode: 'production',
   devtool: 'source-map',
 
-  entry: [path.resolve('src/index.js')],
+  entry: ["babel-polyfill", path.resolve('src/index.js')],
 
   resolve: {
     modules: [
