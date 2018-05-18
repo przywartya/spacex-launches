@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader';
 import * as React from 'react';
-import { launch, launches, launchPad, rocket } from './assets/ExampleLaunch';
+import { launch, launchPad, rocket } from './assets/ExampleLaunch';
 
 import './styles/theme.sass';
 
@@ -12,13 +12,22 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     super(props);
     this.state = {
       viewName: 'list',
+      launches: []
     };
     this.handleLaunchClick = this.handleLaunchClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
+  async componentDidMount() {
+    const launches = await this.fetchLaunchesList();
+    this.setState({
+      launches: launches
+    });
+  }
+
   get activeViewComponent() {
-    const { viewName } = this.state;
+    const { launches, viewName } = this.state;
+    debugger
     switch (viewName) {
       case 'list':
         return (
@@ -46,6 +55,17 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
 
   handleBackClick() {
     this.setState({ viewName: 'list' });
+  }
+
+  async fetchLaunchesList() {
+    try {
+      const URL = "https://api.spacexdata.com/v2/launches";
+      const fetchResult = fetch(URL);
+      const response = await fetchResult;
+      return await response.json();
+    } catch(e) {
+      throw Error(e);
+    }
   }
 
   render() {
