@@ -45,17 +45,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     this.setState({ viewName: 'list' });
   }
 
-  async fetchLaunchesList() {
-    try {
-      const URL = "https://api.spacexdata.com/v2/launches";
-      const fetchResult = fetch(URL);
-      const response = await fetchResult;
-      return await response.json();
-    } catch(e) {
-      throw Error(e);
-    }
-  }
-
   render() {
     return (
       <main>

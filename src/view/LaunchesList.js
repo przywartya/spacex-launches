@@ -38,8 +38,7 @@ class LaunchesList extends React.Component {
       const rocketId = rocketName.split(" ").join("").toLowerCase();
       const URL = `https://api.spacexdata.com/v2/launches?rocket_id=${rocketId}`;
       this.setState({ isLoading: true });
-      const fetchResult = fetch(URL);
-      const response = await fetchResult;
+      const response = await fetch(URL);
       const jsonResponse = await response.json();
       this.setState({ isLoading: false });
       return jsonResponse;
@@ -49,17 +48,20 @@ class LaunchesList extends React.Component {
   }
 
   async getFilteredLaunches(rocketNameFilter){
+    let filteredLaunches;
     if(rocketNameFilter === "ALL ROCKETS") {
-      const filteredLaunches = await this.fetchLaunchByRocketName('');
-      this.setState({ filteredLaunches: filteredLaunches });
+      filteredLaunches = await this.fetchLaunchByRocketName('');
     } else {
-      const filteredLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
-      this.setState({ filteredLaunches: filteredLaunches });
+      filteredLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
     }
+    if (!filteredLaunches) {
+      filteredLaunches = [];
+    }
+    this.setState({ filteredLaunches: filteredLaunches });
   };
 
   handleFilterChange(value) {
-    this.setState({ rocketNameFilter: value });
+    this.setState({ error: null, rocketNameFilter: value });
     this.getFilteredLaunches(value);
   };
 
@@ -70,17 +72,12 @@ class LaunchesList extends React.Component {
           <img src={Moon} className="launches-list__moon"/>
           <Logo className="launches-list__logo"/>
           <h2>LAUNCHES 2018</h2>
-          <FilterButtons  
-          options={this.availableRocketNames}
-          onChange={this.handleFilterChange.bind(this)}/>
-          { this.state.error !== null ? <h3>Connecting with SpaceX API failed. Please try again later.</h3> :
-            this.state.isLoading ? 
-            <CircleLoader color={'#ffffff'} loading={this.state.isLoading}/> :
-            this.state.filteredLaunches.length <= 0 ?
-            <h3>Sorry, no launches found.</h3> : 
-            <Timeline 
-            filteredLaunches={this.state.filteredLaunches}
-            onLaunchClick={this.props.onLaunchClick}/>
+          <FilterButtons options={this.availableRocketNames} onChange={this.handleFilterChange.bind(this)}/>
+          {
+            this.state.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
+            this.state.isLoading ? <CircleLoader color={'#ffffff'} loading={this.state.isLoading}/> :
+            this.state.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
+            <Timeline filteredLaunches={this.state.filteredLaunches} onLaunchClick={this.props.onLaunchClick}/>
           }
         </div>
         <div className="launches-list__footer">
