@@ -209,9 +209,9 @@ h6, .menu-link {
   .launches-list__body h2 {
     color: #a7a9ac;
     font-weight: 500; }
-  .launches-list__body h3 {
-    font-size: 24px;
-    font-weight: 500;
+  .launches-list__body h6 {
+    font-size: 14px;
+    font-weight: 600;
     color: #a7a9ac; }
   .launches-list__body .launches-list__moon {
     background-size: contain;
