@@ -18,7 +18,7 @@ export class MainStore {
 
   constructor() {
     this.disposeAutorun = autorun(() => {
-      if (this.activeViewName === 'list' && this.listState.filteredLaunches.length === 0) {
+      if (this.activeViewName === 'list') {
         this.fetchLaunchByRocketName(this.listState.rocketNameFilter).then(
           filteredLaunches => {
             this.listState.filteredLaunches = filteredLaunches;
@@ -30,21 +30,15 @@ export class MainStore {
 
   @action.bound
   async handleLaunchClick(launch) {
+    let launchPadURL = `https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`;
+    let rocketURL = `https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`;
+    [this.launchState.launchPad, this.launchState.rocket] = await Promise.all([
+      this.getResponseFromUrl(launchPadURL),
+      this.getResponseFromUrl(rocketURL)  
+    ]);
     this.launchState.launch = launch;
-    const launchPadId = launch.launch_site.site_id;
-    //wydzielic te fetchowania do funkcji
-    let URL = `https://api.spacexdata.com/v2/launchpads/${launchPadId}`;
-    let response = await fetch(URL);
-    let jsonResponse = await response.json();
-    this.launchState.launchPad = jsonResponse;
-
-    const rocketId = launch.rocket.rocket_id;
-    URL = `https://api.spacexdata.com/v2/rockets/${rocketId}`;
-    response = await fetch(URL);
-    jsonResponse = await response.json();
-    this.launchState.rocket = jsonResponse;
-
     this.activeViewName = 'details';
+    window.scrollTo(0, 0);
   }
 
   @action.bound
@@ -74,8 +68,7 @@ export class MainStore {
         const rocketId = rocketNameFilter.split(" ").join("").toLowerCase();
         const URL = `https://api.spacexdata.com/v2/launches?rocket_id=${rocketId}`;
         this.listState.isLoading = true;
-        const response = await fetch(URL);
-        const jsonResponse = await response.json();
+        const jsonResponse = await this.getResponseFromUrl(URL);
         this.listState.isLoading = false;
         return jsonResponse;
       } catch(error) {
@@ -83,6 +76,12 @@ export class MainStore {
         this.listState.error = error;
       }
   }
+
+  async getResponseFromUrl(URL) {
+    let response = await fetch(URL);
+    return await response.json();
+  };
+
 }
 
 const instance = new MainStore();

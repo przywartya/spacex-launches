@@ -46,10 +46,10 @@ class LaunchDetails extends React.Component {
               <LaunchLabel launch={launch}/>
             </div>
             <div className="layout__right">
+              {launch.details ?
               <LaunchDescriptionEntry
               descriptionTitle="DETAILS"
-              description={launch.details}
-              />
+              description={launch.details} /> : null}
               <LaunchDescriptionEntry
               descriptionTitle="ROCKET"
               description={rocket.description}
