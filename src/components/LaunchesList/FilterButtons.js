@@ -24,7 +24,7 @@ class FilterButtons extends React.Component {
   renderButtonWithName(name) { 
     const className = this.state.selectedItem === name ? 'menu-link menu-link_active': 'menu-link';
     return (
-      <a onClick={this.onItemClick} className={className}>{name}</a>
+      <a onClick={this.onItemClick} key={name} className={className}>{name}</a>
     );
   };
   

@@ -6,7 +6,7 @@ import TimelineItem from './TimelineItem';
 
 class Timeline extends React.Component {
   static propTypes = {
-    filteredLaunches: PropTypes.array.isRequired,
+    filteredLaunches: PropTypes.object.isRequired,
     onLaunchClick: PropTypes.func.isRequired,
   };
 
@@ -15,7 +15,7 @@ class Timeline extends React.Component {
       <div className="timeline">
         <div className="timeline__vertical-line"></div>
         {this.props.filteredLaunches.map((launch, index) => {
-        return <TimelineItem launch={launch} onLaunchClick={this.props.onLaunchClick}
+        return <TimelineItem launch={launch} key={index} onLaunchClick={this.props.onLaunchClick}
           direction={index % 2 === 0 ? 'right': 'left' }/>;
         })}
       </div>

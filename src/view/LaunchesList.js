@@ -9,75 +9,36 @@ import Footer from '../components/Footer';
 import FilterButtons from '../components/LaunchesList/FilterButtons';
 import Timeline from '../components/LaunchesList/Timeline';
 import { CircleLoader } from 'react-spinners';
+import { observable, action } from 'mobx';
+import { observer, inject } from 'mobx-react';
 
+
+@inject('mainStore')
+@observer
 class LaunchesList extends React.Component {
   static propTypes = {
-    launches: PropTypes.array.isRequired,
+    mainStore: PropTypes.object,
     onLaunchClick: PropTypes.func.isRequired,
   };
-
-  state = {
-    rocketNameFilter: "FALCON 1",
-    filteredLaunches: [],
-    isLoading: false,
-    error: null,
-  };
-
-  async componentDidMount() {
-    this.setState({
-      filteredLaunches: await this.fetchLaunchByRocketName(this.state.rocketNameFilter)
-    });
-  }
 
   get availableRocketNames() {
     return ["ALL ROCKETS", "FALCON 1", "FALCON 9", "FALCON 10", "FALCON HEAVY"];
   };
 
-  async fetchLaunchByRocketName(rocketName) {
-    try {
-      const rocketId = rocketName.split(" ").join("").toLowerCase();
-      const URL = `https://api.spacexdata.com/v2/launches?rocket_id=${rocketId}`;
-      this.setState({ isLoading: true });
-      const response = await fetch(URL);
-      const jsonResponse = await response.json();
-      this.setState({ isLoading: false });
-      return jsonResponse;
-    } catch(error) {
-      this.setState({ error, isLoading: false })
-    }
-  }
-
-  async getFilteredLaunches(rocketNameFilter){
-    let filteredLaunches;
-    if(rocketNameFilter === "ALL ROCKETS") {
-      filteredLaunches = await this.fetchLaunchByRocketName('');
-    } else {
-      filteredLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
-    }
-    if (!filteredLaunches) {
-      filteredLaunches = [];
-    }
-    this.setState({ filteredLaunches: filteredLaunches });
-  };
-
-  handleFilterChange(value) {
-    this.setState({ error: null, rocketNameFilter: value });
-    this.getFilteredLaunches(value);
-  };
-
   render() {
+    const { mainStore } = this.props;
     return (
       <div className="launches-list">
         <div className="launches-list__body">
           <img src={Moon} className="launches-list__moon"/>
           <Logo className="launches-list__logo"/>
           <h2>LAUNCHES 2018</h2>
-          <FilterButtons options={this.availableRocketNames} onChange={this.handleFilterChange.bind(this)}/>
+          <FilterButtons options={this.availableRocketNames} onChange={mainStore.setFilter}/>
           {
-            this.state.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
-            this.state.isLoading ? <CircleLoader color={'#ffffff'} loading={this.state.isLoading}/> :
-            this.state.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
-            <Timeline filteredLaunches={this.state.filteredLaunches} onLaunchClick={this.props.onLaunchClick}/>
+            mainStore.listState.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
+            mainStore.listState.isLoading ? <CircleLoader color={'#ffffff'} loading={mainStore.listState.isLoading}/> :
+            mainStore.listState.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
+            <Timeline filteredLaunches={mainStore.listState.filteredLaunches} onLaunchClick={this.props.onLaunchClick}/>
           }
         </div>
         <div className="launches-list__footer">

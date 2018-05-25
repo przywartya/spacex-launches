@@ -1,17 +1,20 @@
 import { hot } from 'react-hot-loader';
 import * as React from 'react';
+import { Provider } from 'mobx-react';
 import { launch, launchPad, rocket } from './assets/ExampleLaunch';
 
 import './styles/theme.sass';
 
 import LaunchDetails from './view/LaunchDetails';
 import LaunchesList from './view/LaunchesList';
+import mainStore from './stores/mainStore';
+
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
-      viewName: 'list'
+      viewName: 'list',
     };
     this.handleLaunchClick = this.handleLaunchClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
@@ -22,7 +25,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     switch (viewName) {
       case 'list':
         return (
-          <LaunchesList onLaunchClick={this.handleLaunchClick}/>
+          <LaunchesList onLaunchClick={this.handleLaunchClick} />
         );
       case 'details':
         return (
@@ -48,7 +51,11 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
   render() {
     return (
       <main>
-        {this.activeViewComponent}
+        <Provider mainStore={mainStore}>
+          <div>
+            {this.activeViewComponent}
+          </div>
+        </Provider>
       </main>
     );
   }
