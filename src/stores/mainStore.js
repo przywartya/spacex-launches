@@ -28,6 +28,10 @@ export class MainStore {
     });
   }
 
+  get availableRocketNames() {
+    return ["ALL ROCKETS", "FALCON 1", "FALCON 9", "FALCON 10", "FALCON HEAVY"];
+  };
+
   @action.bound
   async handleLaunchClick(launch) {
     let launchPadURL = `https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`;
@@ -47,7 +51,8 @@ export class MainStore {
   }
 
   @action.bound
-  async setFilter(rocketNameFilter){
+  async setFilter(event) {
+    let rocketNameFilter = event.currentTarget.text;
     this.listState.isLoading = false;
     this.listState.error = null;
     this.listState.rocketNameFilter = rocketNameFilter;

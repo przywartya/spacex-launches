@@ -3,35 +3,28 @@ import PropTypes from 'prop-types';
 
 import './FilterButtons.sass';
 
+import { observer, inject } from 'mobx-react';
+
+
+@inject('mainStore')
+@observer
 class FilterButtons extends React.Component {
   static propTypes = {
-    options: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
-  state = {
-    selectedItem: "FALCON 1",
-  };
-
-  onItemClick = (event) => {
-    const selectedItem = event.currentTarget.text;
-    this.props.onChange(selectedItem);
-    this.setState({
-      selectedItem,
-    });
+    mainStore: PropTypes.object,
   };
 
   renderButtonWithName(name) { 
-    const className = this.state.selectedItem === name ? 'menu-link menu-link_active': 'menu-link';
+    let selectedItem = this.props.mainStore.listState.rocketNameFilter;
+    const className = selectedItem === name ? 'menu-link menu-link_active': 'menu-link';
     return (
-      <a onClick={this.onItemClick} key={name}className={className}>{name}</a>
+      <a onClick={this.props.mainStore.setFilter} key={name} className={className}>{name}</a>
     );
   };
   
   render() {
     return (
       <div className="filter-buttons">
-        {this.props.options.map((name) => this.renderButtonWithName(name))}
+        {this.props.mainStore.availableRocketNames.map((name) => this.renderButtonWithName(name))}
       </div>
     );
   }

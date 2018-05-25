@@ -19,24 +19,21 @@ class LaunchesList extends React.Component {
     mainStore: PropTypes.object,
   };
 
-  get availableRocketNames() {
-    return ["ALL ROCKETS", "FALCON 1", "FALCON 9", "FALCON 10", "FALCON HEAVY"];
-  };
-
   render() {
     const { mainStore } = this.props;
+    const { listState } = mainStore;
     return (
       <div className="launches-list">
         <div className="launches-list__body">
           <img src={Moon} className="launches-list__moon"/>
           <Logo className="launches-list__logo"/>
           <h2>LAUNCHES 2018</h2>
-          <FilterButtons options={this.availableRocketNames} onChange={mainStore.setFilter}/>
+          <FilterButtons />
           {
-            mainStore.listState.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
-            mainStore.listState.isLoading ? <CircleLoader color={'#ffffff'} loading={mainStore.listState.isLoading}/> :
-            mainStore.listState.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
-            <Timeline filteredLaunches={mainStore.listState.filteredLaunches} onLaunchClick={mainStore.handleLaunchClick}/>
+            listState.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
+            listState.isLoading ? <CircleLoader color={'#ffffff'} /> :
+            listState.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
+            <Timeline />
           }
         </div>
         <div className="launches-list__footer">
