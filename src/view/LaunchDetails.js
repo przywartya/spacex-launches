@@ -7,59 +7,63 @@ import Navbar from '../components/Navbar';
 import LaunchLabel from '../components/Launch/LaunchLabel';
 import RocketMenu from '../components/Launch/RocketMenu';
 import LaunchDescriptionEntry from '../components/Launch/LaunchDescriptionEntry';
+import { observer, inject } from 'mobx-react';
 
+
+@inject('mainStore')
+@observer
 class LaunchDetails extends React.Component {
   static propTypes = {
-    rocket: PropTypes.object.isRequired,
-    launch: PropTypes.object.isRequired,
-    launchPad: PropTypes.object.isRequired,
-    onBackClick: PropTypes.func.isRequired,
-  }
+    mainStore: PropTypes.object,
+  };
 
   render() {
+    const launch = this.props.mainStore.launchState.launch;
+    const launchPad = this.props.mainStore.launchState.launchPad;
+    const rocket = this.props.mainStore.launchState.rocket;
     let descriptionLaunchPad = {
-      "NAME": this.props.launchPad["full_name"].toUpperCase(),
-      "LOCATION": this.props.launchPad["location"]["name"].toUpperCase(),
+      "NAME": launchPad["full_name"].toUpperCase(),
+      "LOCATION": launchPad["location"]["name"].toUpperCase(),
     };
     let descriptionEntryRocket = {
-      "NAME": this.props.rocket["name"].toUpperCase(),
-      "COMPANY": this.props.rocket["company"].toUpperCase(),
-      "DIAMETER (m)": this.props.rocket["diameter"]["meters"],
-      "MASS (kg)": this.props.rocket["mass"]["kg"],
-      "FIRST FLIGHT": this.props.rocket["first_flight"].toUpperCase(),
-      "COUNTRY": this.props.rocket["country"].toUpperCase(),
-      "SUCCESS RATE (%)": this.props.rocket["success_rate_pct"],
-      "COST PER LAUNCH ($)": this.props.rocket["cost_per_launch"]
+      "NAME": rocket["name"].toUpperCase(),
+      "COMPANY": rocket["company"].toUpperCase(),
+      "DIAMETER (m)": rocket["diameter"]["meters"],
+      "MASS (kg)": rocket["mass"]["kg"],
+      "FIRST FLIGHT": rocket["first_flight"].toUpperCase(),
+      "COUNTRY": rocket["country"].toUpperCase(),
+      "SUCCESS RATE (%)": rocket["success_rate_pct"],
+      "COST PER LAUNCH ($)": rocket["cost_per_launch"]
     };
     return (
       <div>
         <div className="launch-details-navbar">
-          <Navbar onBackClick={this.props.onBackClick}/>
+          <Navbar onBackClick={this.props.mainStore.handleBackClick}/>
         </div>
         <div className="launch-details-body">
           <div className="layout">
             <div className="layout__left">
-              <LaunchLabel launch={this.props.launch}/>
+              <LaunchLabel launch={launch}/>
             </div>
             <div className="layout__right">
               <LaunchDescriptionEntry
               descriptionTitle="DETAILS"
-              description={this.props.launch.details}
+              description={launch.details}
               />
               <LaunchDescriptionEntry
               descriptionTitle="ROCKET"
-              description={this.props.rocket.description}
+              description={rocket.description}
               descriptionDetailsList={descriptionEntryRocket}
               />
               <LaunchDescriptionEntry
               descriptionTitle="LAUNCH PAD"
-              description={this.props.launchPad.details}
+              description={launchPad.details}
               descriptionDetailsList={descriptionLaunchPad}
               />
             </div>
           </div>
         </div>
-        <RocketMenu launch={this.props.launch}/>
+        <RocketMenu launch={launch}/>
         <div className="launch-details-footer">
           <Footer/>
         </div>

@@ -1,6 +1,14 @@
 import { action, autorun, computed, observable } from 'mobx';
 
 export class MainStore {
+  @observable activeViewName = 'list';
+  
+  @observable launchState = {
+    launch: null,
+    launchPad: null,
+    rocket: null,
+  };
+
   @observable listState = {
     rocketNameFilter: "FALCON 1",
     filteredLaunches: [],
@@ -10,12 +18,38 @@ export class MainStore {
 
   constructor() {
     this.disposeAutorun = autorun(() => {
-      this.fetchLaunchByRocketName(this.listState.rocketNameFilter).then(
-        filteredLaunches => {
-          this.listState.filteredLaunches = filteredLaunches;
-        }
-      );
+      if (this.activeViewName === 'list' && this.listState.filteredLaunches.length === 0) {
+        this.fetchLaunchByRocketName(this.listState.rocketNameFilter).then(
+          filteredLaunches => {
+            this.listState.filteredLaunches = filteredLaunches;
+          }
+        );
+      }
     });
+  }
+
+  @action.bound
+  async handleLaunchClick(launch) {
+    this.launchState.launch = launch;
+    const launchPadId = launch.launch_site.site_id;
+    //wydzielic te fetchowania do funkcji
+    let URL = `https://api.spacexdata.com/v2/launchpads/${launchPadId}`;
+    let response = await fetch(URL);
+    let jsonResponse = await response.json();
+    this.launchState.launchPad = jsonResponse;
+
+    const rocketId = launch.rocket.rocket_id;
+    URL = `https://api.spacexdata.com/v2/rockets/${rocketId}`;
+    response = await fetch(URL);
+    jsonResponse = await response.json();
+    this.launchState.rocket = jsonResponse;
+
+    this.activeViewName = 'details';
+  }
+
+  @action.bound
+  handleBackClick() {
+    this.activeViewName = 'list';
   }
 
   @action.bound

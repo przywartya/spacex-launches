@@ -25,7 +25,7 @@ class LaunchLabel extends React.Component {
                     <h5>{launchDateString}</h5>
                 </div>
                 <div>
-                    <h1>{payloadId} {coreSerial} LAUNCH</h1>
+                    <h1>{payloadId} {coreSerial}</h1>
                     {!isPast(launchDate) &&
                         <Countdown 
                         date={launchDate} 

@@ -9,7 +9,6 @@ import Footer from '../components/Footer';
 import FilterButtons from '../components/LaunchesList/FilterButtons';
 import Timeline from '../components/LaunchesList/Timeline';
 import { CircleLoader } from 'react-spinners';
-import { observable, action } from 'mobx';
 import { observer, inject } from 'mobx-react';
 
 
@@ -18,7 +17,6 @@ import { observer, inject } from 'mobx-react';
 class LaunchesList extends React.Component {
   static propTypes = {
     mainStore: PropTypes.object,
-    onLaunchClick: PropTypes.func.isRequired,
   };
 
   get availableRocketNames() {
@@ -38,7 +36,7 @@ class LaunchesList extends React.Component {
             mainStore.listState.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
             mainStore.listState.isLoading ? <CircleLoader color={'#ffffff'} loading={mainStore.listState.isLoading}/> :
             mainStore.listState.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
-            <Timeline filteredLaunches={mainStore.listState.filteredLaunches} onLaunchClick={this.props.onLaunchClick}/>
+            <Timeline filteredLaunches={mainStore.listState.filteredLaunches} onLaunchClick={mainStore.handleLaunchClick}/>
           }
         </div>
         <div className="launches-list__footer">
