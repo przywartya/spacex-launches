@@ -61,7 +61,7 @@ export class MainStore {
 
   @action.bound
   handleLaunchClick(launch) {
-    this.launchState.launch = 0launch;
+    this.launchState.launch = launch;
     this.launchState.isLoading = true;
     this.launchState.error = null;
     this.activeViewName = 'details';
