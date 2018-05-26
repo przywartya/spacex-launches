@@ -17,10 +17,10 @@ class Timeline extends React.Component {
     return (
       <div className="timeline">
         <div className="timeline__vertical-line"></div>
-        {this.props.mainStore.listState.filteredLaunches.map((launch, index) => {
-        return <TimelineItem launch={launch} key={index} onLaunchClick={this.props.mainStore.handleLaunchClick}
-          direction={index % 2 === 0 ? 'right': 'left' }/>;
-        })}
+        {this.props.mainStore.listState.allLaunches[this.props.mainStore.listState.rocketNameFilter].map((launch, index) => {
+          return <TimelineItem launch={launch} key={index} onLaunchClick={this.props.mainStore.handleLaunchClick}
+            direction={index % 2 === 0 ? 'right': 'left' }/>;
+          })}
       </div>
     );
   }

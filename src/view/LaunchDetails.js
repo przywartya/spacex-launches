@@ -8,6 +8,7 @@ import LaunchLabel from '../components/Launch/LaunchLabel';
 import RocketMenu from '../components/Launch/RocketMenu';
 import LaunchDescriptionEntry from '../components/Launch/LaunchDescriptionEntry';
 import { observer, inject } from 'mobx-react';
+import { CircleLoader } from 'react-spinners';
 
 
 @inject('mainStore')
@@ -17,10 +18,9 @@ class LaunchDetails extends React.Component {
     mainStore: PropTypes.object,
   };
 
-  render() {
-    const launch = this.props.mainStore.launchState.launch;
-    const launchPad = this.props.mainStore.launchState.launchPad;
-    const rocket = this.props.mainStore.launchState.rocket;
+  get launchDetailsBody() {
+    const { launchState } = this.props.mainStore;
+    const { launch, launchPad, rocket, isLoading } = launchState;
     let descriptionLaunchPad = {
       "NAME": launchPad["full_name"].toUpperCase(),
       "LOCATION": launchPad["location"]["name"].toUpperCase(),
@@ -37,9 +37,6 @@ class LaunchDetails extends React.Component {
     };
     return (
       <div>
-        <div className="launch-details-navbar">
-          <Navbar onBackClick={this.props.mainStore.handleBackClick}/>
-        </div>
         <div className="launch-details-body">
           <div className="layout">
             <div className="layout__left">
@@ -64,6 +61,23 @@ class LaunchDetails extends React.Component {
           </div>
         </div>
         <RocketMenu launch={launch}/>
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <div className="launch-details">
+        <div className="launch-details-navbar">
+          <Navbar onBackClick={this.props.mainStore.handleBackClick}/>
+        </div>
+        <div className="launch-details-body-wrapper">
+          {
+            this.props.mainStore.launchState.error !== null ? <h3>CONNECTING WITH SPACEX API FAILED.</h3> :
+            this.props.mainStore.launchState.isLoading ? <div className="launch-details-loader"><CircleLoader size="300" /></div> :
+            this.launchDetailsBody
+          }
+        </div>
         <div className="launch-details-footer">
           <Footer/>
         </div>

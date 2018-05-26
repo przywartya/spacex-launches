@@ -1,15 +1,24 @@
 @import "../styles/variables"
 
-.launch-details-navbar
-    background: $dark-grey
-    padding: 0 44px
+.launch-details
+    display: flex
+    min-height: 100vh
+    flex-direction: column
 
-.launch-details-body
-    padding: 44px
+    &-navbar
+        background: $dark-grey
+        padding: 0 44px
 
-.launch-details-footer
-    background: $dark-grey
-    padding: 0 44px
+    &-body-wrapper
+        flex: 1
+        display: flex
+        justify-content: center
+        .launch-details-body
+            padding: 44px
+
+    &-footer
+        background: $dark-grey
+        padding: 0 44px
 
 .layout
     display: flex

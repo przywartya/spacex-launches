@@ -20,8 +20,7 @@ class LaunchesList extends React.Component {
   };
 
   render() {
-    const { mainStore } = this.props;
-    const { listState } = mainStore;
+    const { listState } = this.props.mainStore;
     return (
       <div className="launches-list">
         <div className="launches-list__body">
@@ -32,7 +31,7 @@ class LaunchesList extends React.Component {
           {
             listState.error !== null ? <h6>CONNECTING WITH SPACEX API FAILED.</h6> :
             listState.isLoading ? <CircleLoader color={'#ffffff'} /> :
-            listState.filteredLaunches.length <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
+            listState.allLaunches[listState.rocketNameFilter] <= 0 ? <h6>SORRY, NO LAUNCHES FOUND.</h6> :
             <Timeline />
           }
         </div>

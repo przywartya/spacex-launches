@@ -1,17 +1,23 @@
 import { action, autorun, computed, observable } from 'mobx';
 
 export class MainStore {
+  get availableRocketNames() {
+    return ["ALL ROCKETS", "FALCON 1", "FALCON 9", "FALCON 10", "FALCON HEAVY"];
+  };
+
   @observable activeViewName = 'list';
   
   @observable launchState = {
     launch: null,
     launchPad: null,
     rocket: null,
+    isLoading: false,
+    error: null,
   };
 
   @observable listState = {
     rocketNameFilter: "FALCON 1",
-    filteredLaunches: [],
+    allLaunches: {},
     isLoading: false,
     error: null,
   }
@@ -19,30 +25,46 @@ export class MainStore {
   constructor() {
     this.disposeAutorun = autorun(() => {
       if (this.activeViewName === 'list') {
-        this.fetchLaunchByRocketName(this.listState.rocketNameFilter).then(
-          filteredLaunches => {
-            this.listState.filteredLaunches = filteredLaunches;
-          }
-        );
+        const rocketNameFilter = this.listState.rocketNameFilter;
+        this.listState.isLoading = false;
+        this.listState.error = null;
+        if (!this.listState.allLaunches.hasOwnProperty(rocketNameFilter)) {
+          this.listState.isLoading = true;
+          this.fetchLaunchByRocketName(rocketNameFilter).then(newLaunches => {
+            this.listState.allLaunches[rocketNameFilter] = newLaunches;
+            this.listState.isLoading = false;
+          }).catch(error => {
+            this.listState.error = error;
+            this.listState.isLoading = false;
+          });
+        }
+      }
+      if (this.activeViewName === 'details') {
+        let { launch } = this.launchState;
+        let launchPadURL = `https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`;
+        let rocketURL = `https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`;
+        Promise.all([
+          this.getResponseFromUrl(launchPadURL),
+          this.getResponseFromUrl(rocketURL)  
+        ]).then(data => {
+          this.launchState.launchPad = data[0];
+          this.launchState.rocket = data[1];
+          this.launchState.isLoading = false;
+        }).catch(error => {
+          this.launchState.isLoading = false;
+          this.launchState.error = error;
+        });
+        window.scrollTo(0, 0);
       }
     });
   }
 
-  get availableRocketNames() {
-    return ["ALL ROCKETS", "FALCON 1", "FALCON 9", "FALCON 10", "FALCON HEAVY"];
-  };
-
   @action.bound
-  async handleLaunchClick(launch) {
-    let launchPadURL = `https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`;
-    let rocketURL = `https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`;
-    [this.launchState.launchPad, this.launchState.rocket] = await Promise.all([
-      this.getResponseFromUrl(launchPadURL),
-      this.getResponseFromUrl(rocketURL)  
-    ]);
+  handleLaunchClick(launch) {
     this.launchState.launch = launch;
+    this.launchState.isLoading = true;
+    this.launchState.error = null;
     this.activeViewName = 'details';
-    window.scrollTo(0, 0);
   }
 
   @action.bound
@@ -51,35 +73,17 @@ export class MainStore {
   }
 
   @action.bound
-  async setFilter(event) {
-    let rocketNameFilter = event.currentTarget.text;
-    this.listState.isLoading = false;
-    this.listState.error = null;
-    this.listState.rocketNameFilter = rocketNameFilter;
-    let filteredLaunches;
-    if(rocketNameFilter === "ALL ROCKETS") {
-      filteredLaunches = await this.fetchLaunchByRocketName('');
-    } else {
-      filteredLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
-    }
-    if (!filteredLaunches) {
-      filteredLaunches = [];
-    }
-    this.listState.filteredLaunches = filteredLaunches;
+  setFilter(event) {
+    this.listState.rocketNameFilter = event.currentTarget.text;
   }
 
   async fetchLaunchByRocketName(rocketNameFilter) {
-      try {
-        const rocketId = rocketNameFilter.split(" ").join("").toLowerCase();
-        const URL = `https://api.spacexdata.com/v2/launches?rocket_id=${rocketId}`;
-        this.listState.isLoading = true;
-        const jsonResponse = await this.getResponseFromUrl(URL);
-        this.listState.isLoading = false;
-        return jsonResponse;
-      } catch(error) {
-        this.listState.isLoading = false;
-        this.listState.error = error;
-      }
+    rocketNameFilter = (rocketNameFilter === "ALL ROCKETS") ? '' : rocketNameFilter;
+    const rocketId = rocketNameFilter.split(" ").join("").toLowerCase();
+    const URL = `https://api.spacexdata.com/v2/launches?rocket_id=${rocketId}`;
+    let jsonResponse = await this.getResponseFromUrl(URL);
+    jsonResponse = (!jsonResponse) ? [] : jsonResponse;
+    return jsonResponse;
   }
 
   async getResponseFromUrl(URL) {
