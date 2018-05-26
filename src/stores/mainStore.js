@@ -24,46 +24,52 @@ export class MainStore {
 
   constructor() {
     this.disposeAutorun = autorun(() => {
-      if (this.activeViewName === 'list') {
-        const rocketNameFilter = this.listState.rocketNameFilter;
-        this.listState.isLoading = false;
-        this.listState.error = null;
-        if (!this.listState.allLaunches.hasOwnProperty(rocketNameFilter)) {
-          this.listState.isLoading = true;
-          this.fetchLaunchByRocketName(rocketNameFilter).then(newLaunches => {
-            this.listState.allLaunches[rocketNameFilter] = newLaunches;
-            this.listState.isLoading = false;
-          }).catch(error => {
-            this.listState.error = error;
-            this.listState.isLoading = false;
-          });
-        }
-      }
-      if (this.activeViewName === 'details') {
-        let { launch } = this.launchState;
-        let launchPadURL = `https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`;
-        let rocketURL = `https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`;
-        Promise.all([
-          this.getResponseFromUrl(launchPadURL),
-          this.getResponseFromUrl(rocketURL)  
-        ]).then(data => {
-          this.launchState.launchPad = data[0];
-          this.launchState.rocket = data[1];
-          this.launchState.isLoading = false;
-        }).catch(error => {
-          this.launchState.isLoading = false;
-          this.launchState.error = error;
-        });
-        window.scrollTo(0, 0);
+      switch (this.activeViewName) {
+        case 'list':
+          this.setListState(this.listState.rocketNameFilter);
+          break;
+        case 'details':
+          this.setLaunchState();
+          break;
       }
     });
   }
 
   @action.bound
-  handleLaunchClick(launch) {
-    this.launchState.launch = launch;
+  async setListState(rocketNameFilter) {
+    this.listState.isLoading = false;
+    this.listState.error = null;
+    if (!this.listState.allLaunches.hasOwnProperty(rocketNameFilter)) {
+      this.listState.isLoading = true;
+      try {
+        this.listState.allLaunches[rocketNameFilter] = await this.fetchLaunchByRocketName(rocketNameFilter);
+      } catch (error) {
+        this.listState.error = error;
+      }
+      this.listState.isLoading = false;
+    }
+  }
+
+  @action.bound
+  async setLaunchState() {
     this.launchState.isLoading = true;
     this.launchState.error = null;
+    try {
+      let { launch } = this.launchState;
+      [this.launchState.launchPad, this.launchState.rocket] = await Promise.all([
+        this.getResponseFromUrl(`https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`),
+        this.getResponseFromUrl(`https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`)
+      ]);
+    } catch (error) {
+      this.launchState.error = error;
+    }
+    this.launchState.isLoading = false;
+    window.scrollTo(0, 0);
+  }
+
+  @action.bound
+  handleLaunchClick(launch) {
+    this.launchState.launch = launch;
     this.activeViewName = 'details';
   }
 
