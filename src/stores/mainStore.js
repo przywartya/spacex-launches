@@ -1,4 +1,4 @@
-import { action, autorun, computed, observable } from 'mobx';
+import { action, autorun, computed, observable, runInAction } from 'mobx';
 
 export class MainStore {
   get availableRocketNames() {
@@ -42,11 +42,18 @@ export class MainStore {
     if (!this.listState.allLaunches.hasOwnProperty(rocketNameFilter)) {
       this.listState.isLoading = true;
       try {
-        this.listState.allLaunches[rocketNameFilter] = await this.fetchLaunchByRocketName(rocketNameFilter);
+        const fetchedLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
+        runInAction(() => {
+          this.listState.allLaunches[rocketNameFilter] = fetchedLaunches;
+        })
       } catch (error) {
-        this.listState.error = error;
+        runInAction(() => {
+          this.listState.error = error;
+        })
       }
-      this.listState.isLoading = false;
+      runInAction(() => {
+        this.listState.isLoading = false;
+      })
     }
   }
 
@@ -56,14 +63,23 @@ export class MainStore {
     this.launchState.error = null;
     try {
       let { launch } = this.launchState;
-      [this.launchState.launchPad, this.launchState.rocket] = await Promise.all([
+      let launchPad, rocket;
+      [launchPad, rocket] = await Promise.all([
         this.getResponseFromUrl(`https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`),
         this.getResponseFromUrl(`https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`)
       ]);
+      runInAction(() => {
+        this.launchState.launchPad = launchPad;
+        this.launchState.rocket = rocket;
+      })
     } catch (error) {
-      this.launchState.error = error;
+      runInAction(() => {
+        this.launchState.error = error;
+      })
     }
-    this.launchState.isLoading = false;
+    runInAction(() => {
+      this.launchState.isLoading = false;
+    })
     window.scrollTo(0, 0);
   }
 
