@@ -213,7 +213,20 @@ h6, .menu-link {
     .description__details__entry__key {
       color: #a7a9ac; }
 
+.launches-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
 .launches-list__body {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   background: #0f1112;
   padding: 100px 44px;
   display: -webkit-box;
