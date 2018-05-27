@@ -1,4 +1,4 @@
-import { action, autorun, computed, observable, runInAction } from 'mobx';
+import { action, autorun, computed, observable, runInAction, flow } from 'mobx';
 
 export class MainStore {
   get availableRocketNames() {
@@ -35,53 +35,35 @@ export class MainStore {
     });
   }
 
-  @action.bound
-  async setListState(rocketNameFilter) {
+  setListState = flow(function * (rocketNameFilter) {
     this.listState.isLoading = false;
     this.listState.error = null;
     if (!this.listState.allLaunches.hasOwnProperty(rocketNameFilter)) {
       this.listState.isLoading = true;
       try {
-        const fetchedLaunches = await this.fetchLaunchByRocketName(rocketNameFilter);
-        runInAction(() => {
-          this.listState.allLaunches[rocketNameFilter] = fetchedLaunches;
-        })
+        this.listState.allLaunches[rocketNameFilter] = yield this.fetchLaunchByRocketName(rocketNameFilter);
       } catch (error) {
-        runInAction(() => {
-          this.listState.error = error;
-        })
+        this.listState.error = error;
       }
-      runInAction(() => {
-        this.listState.isLoading = false;
-      })
+      this.listState.isLoading = false;
     }
-  }
+  })
 
-  @action.bound
-  async setLaunchState() {
+  setLaunchState = flow(function * () {
     this.launchState.isLoading = true;
     this.launchState.error = null;
     try {
       let { launch } = this.launchState;
-      let launchPad, rocket;
-      [launchPad, rocket] = await Promise.all([
+      [this.launchState.launchPad, this.launchState.rocket] = yield Promise.all([
         this.getResponseFromUrl(`https://api.spacexdata.com/v2/launchpads/${launch.launch_site.site_id}`),
         this.getResponseFromUrl(`https://api.spacexdata.com/v2/rockets/${launch.rocket.rocket_id}`)
       ]);
-      runInAction(() => {
-        this.launchState.launchPad = launchPad;
-        this.launchState.rocket = rocket;
-      })
     } catch (error) {
-      runInAction(() => {
-        this.launchState.error = error;
-      })
+      this.launchState.error = error;
     }
-    runInAction(() => {
-      this.launchState.isLoading = false;
-    })
+    this.launchState.isLoading = false;
     window.scrollTo(0, 0);
-  }
+  });
 
   @action.bound
   handleLaunchClick(launch) {
